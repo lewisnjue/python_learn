@@ -1,5 +1,14 @@
 class Student:
-    ...
+    def __init__(self,name,house):
+        if not name:
+            raise ValueError('missing name')
+        if not house:
+            raise ValueError('missing house')
+        
+            
+        self.name = name ,
+        self.house = house
+
 
 
 def main():
@@ -10,9 +19,14 @@ def main():
     
 
 def get_student():
-    student = Student()
-    student.name = input('Name: ')
-    student.house = input('House: ')
+    name = input('Name: ')
+    house = input('House: ')
+    try:
+        student = Student(name,house)
+    except ValueError:
+        ...
+        
+
     return student
 
 
