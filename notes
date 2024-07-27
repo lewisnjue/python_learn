@@ -1,0 +1,72 @@
+python offers several ways to achieve concurrency , each with its
+own strengths and weaknesses. lets break down the diffreces 
+between multithreading, multiprocessing and asynchronous programming
+	MULTITHREADING
+defination: involves creating multiple threads within a single 
+process , threads share tre same memory space , making communication between them efficient .
+props: relativey easy to implement , good for i/o bound tastks 
+eg network requests , file operatiosn )
+cons: in python the global interpreer lock limes the ability to 
+fully utilize multiple cpu cores for cpu bounds tasks 
+	MULTIPROCESSING
+defination: creates multiple processes , each with its own memory space.
+props: overcomes the GIL limitaions, excellent for cpu bound tasks 
+suitable for tasks that require isolation
+cons: more complex to manage , communication between processes is slower
+thatn between threads due to separate memory spaces .
+	ASYCHRONOUS PROGRAMMING
+defination: a programming paradgm where funtiosn can return immedeately
+withour waitign for hteir results, allowing the program to handle multiple
+tasks concurrently. 
+props: efficient for i/o bound tasks , can handle  many concurrent 
+tasks witho a single thread often leads to more responsieve applications .
+cons: can be complex to reason about , requires careful handling 
+of asychronous code , not suitable for all types of tasks 
+		WHEN TO USE WHICH 
+multitrheading: suitable for i/o bund tasks where you need to handle 
+multiple tasks concurrently within a single process, however  be 
+aware for the gil limitaions for cpu bound tasks 
+multiprocessing: ideal for cpu bound tasks that cna be benefit from 
+multiple cores or when you need complete isolation 
+between tasks 
+asychronous proramming: best for i/o bound tasks where you want to 
+handle many concurrent connections efficenty ots also useful for 
+builind higly responsive applications
+
+in summary the choce between multithreaidng, mutiprocesssing and 
+asychronous programming depends on the spcific requirements of our application
+understandin the streaths and weakness of each 
+approach will help you make infomed decisons.
+
+
+		ASYCHRONOUS PROGRAMMING 
+asychronous programming is a style of programming where funtions can return 
+immedietely withour wationg for their result s this allows the 
+prgram to handle multiple tasks concurrently 
+using a single tread 
+	KEY CONCEPTS 
+event loop:  the core compnent of asychrouons programming. it manages 
+the execuriotn of tasks and switches between them based on therir readness 
+coreotine: a special type of funtion that can suspend its executon and 
+resume later 
+asyc/await: keywords used to define the use coreoutes 
+basic example with asycnion
+
+
+
+import asyncio
+import time
+
+async def greet(name):
+    print(f"Hello, {name}!")
+    await asyncio.sleep(1)
+    print(f"Good to see you, {name}!")
+
+async def main():
+    task1 = asyncio.create_task(greet("Alice"))
+    task2 = asyncio.create_task(greet("Bob"))
+    await task1
+    await task2
+
+asyncio.run(main())  
+
